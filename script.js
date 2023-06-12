@@ -1,179 +1,95 @@
-// Initialize Firebase
-var firebaseConfig = {
-    // Your Firebase configuration details
-      apiKey: "AIzaSyCsB8WkZBzz0aYfXdAxeO8EemQW90vcURU",
-    authDomain: "student-managment-webapp.firebaseapp.com",
-    projectId: "student-managment-webapp",
-    storageBucket: "student-managment-webapp.appspot.com",
-    messagingSenderId: "812500721519",
-    appId: "1:812500721519:web:e2442ab1be71818e97129a"
+// script.js
+// Your web app's Firebase configuration
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCKu8oeqHdYVB8GCF-DHRREz0ntiNgH25k",
+    authDomain: "student-managment-webapp1.firebaseapp.com",
+    projectId: "student-managment-webapp1",
+    storageBucket: "student-managment-webapp1.appspot.com",
+    messagingSenderId: "923621203026",
+    appId: "1:923621203026:web:263f8988f92bb823a6d38b"
   };
-  
-  firebase.initializeApp(firebaseConfig);
-  
-  var form = document.getElementById('#form');
-  let button = document.getElementById('addstudent')
-  var resultTable = document.getElementById('result');
-  
-  button.addEventListener('click', function(event) {
-    event.preventDefault();
-  
-    var name = document.getElementById('name').value;
-    var className = document.getElementById('class').value;
-    var id = document.getElementById('id').value;
-  
-    var database = firebase.database();
-    var studentsRef = database.ref('students');
-  
-    var student = {
-      name: name,
-      class: className,
-      id: id
+
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Geting add student button element from HTML
+const addButton = document.getElementById("addstudent");
+
+// Handling button click event
+addButton.addEventListener("click", async () => {
+    // Geting input field values
+    const nameInput = document.getElementById("name");
+    const classInput = document.getElementById("class");
+    const idInput = document.getElementById("id");
+
+    // Creating data object from input values
+    const data = {
+        name: nameInput.value,
+        class: classInput.value,
+        id: idInput.value
     };
-  
-    studentsRef.push(student);
-  });
-  
-  function updateTable(snapshot) {
-    resultTable.innerHTML = '';
-  
-    snapshot.forEach(function(childSnapshot) {
-      var student = childSnapshot.val();
-  
-      var row = document.createElement('tr');
-  
-      var nameCell = document.createElement('td');
-      nameCell.textContent = student.name;
-      row.appendChild(nameCell);
-  
-      var classCell = document.createElement('td');
-      classCell.textContent = student.class;
-      row.appendChild(classCell);
-  
-      var idCell = document.createElement('td');
-      idCell.textContent = student.id;
-      row.appendChild(idCell);
-  
-      var actionsCell = document.createElement('td');
-      actionsCell.textContent = 'Some actions'; // Add your desired actions here
-      row.appendChild(actionsCell);
-  
-      resultTable.appendChild(row);
+
+    try {
+        // Adding data to Firestore collection
+        await db.collection("User1").add(data);
+        console.log("Document added successfully");
+
+        // Clearing input fields after successful submission
+        nameInput.value = "";
+        classInput.value = "";
+        idInput.value = "";
+    } catch (error) {
+        console.error("Error adding document: ", error);
+    }
+});
+
+// Function to retrieve data from Firestore and update table
+const retrieveDataAndUpdateTable = async () => {
+    const querySnapshot = await db.collection("User1").get();
+    const resultTable = document.getElementById("result");
+
+    // Clearing previous content
+    resultTable.innerHTML = "";
+
+    querySnapshot.forEach((doc) => {
+        const rowData = doc.data();
+
+        // Create table row for each document
+        const row = document.createElement("tr");
+
+        // Create table cells
+        const nameCell = document.createElement("td");
+        nameCell.textContent = rowData.name;
+        const classCell = document.createElement("td");
+        classCell.textContent = rowData.class;
+        const idCell = document.createElement("td");
+        idCell.textContent = rowData.id;
+        const actionsCell = document.createElement("td");
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        actionsCell.appendChild(editButton);
+        actionsCell.appendChild(deleteButton);
+
+        // Append cells to row
+        row.appendChild(nameCell);
+        row.appendChild(classCell);
+        row.appendChild(idCell);
+        row.appendChild(actionsCell);
+
+        // Append row to table
+        resultTable.appendChild(row);
     });
-  }
-  
-  var studentsRef = firebase.database().ref('students');
-  studentsRef.on('value', updateTable);
-  
+};
 
+// Call the function to retrieve data and update the table
+retrieveDataAndUpdateTable();
 
-
-
-
-
-
-
-
-
-
-
-
-
-// // Initialize Firebase with your project's configuration
-// var firebaseConfig = {
-//     // Your Firebase configuration details
-//     apiKey: "AIzaSyCsB8WkZBzz0aYfXdAxeO8EemQW90vcURU",
-//     authDomain: "student-managment-webapp.firebaseapp.com",
-//     projectId: "student-managment-webapp",
-//     storageBucket: "student-managment-webapp.appspot.com",
-//     messagingSenderId: "812500721519",
-//     appId: "1:812500721519:web:e2442ab1be71818e97129a"
-//   };
-  
-//   firebase.initializeApp(firebaseConfig);
-//   var db = firebase.firestore();
-  
-//   // Function to add a student to Firestore
-//   function addStudentToFirestore(name, className, id) {
-//     db.collection("students")
-//       .add({
-//         name: name,
-//         class: className,
-//         id: id
-//       })
-//       .then(function(docRef) {
-//         console.log("Document written with ID: ", docRef.id);
-//         // You can perform additional actions here, such as updating the table
-//       })
-//       .catch(function(error) {
-//         console.error("Error adding document: ", error);
-//       });
-//   }
-  
-//   // Event listener for form submit
-//   var form = document.getElementById("form");
-//   form.addEventListener("submit", function(event) {
-//     event.preventDefault(); // Prevent the default form submission
-  
-//     // Get the input values
-//     var nameInput = document.getElementById("name");
-//     var classInput = document.getElementById("class");
-//     var idInput = document.getElementById("id");
-//     var name = nameInput.value;
-//     var className = classInput.value;
-//     var id = idInput.value;
-  
-//     // Add the student to Firestore
-//     addStudentToFirestore(name, className, id);
-  
-//     // Clear the form inputs
-//     nameInput.value = "";
-//     classInput.value = "";
-//     idInput.value = "";
-//   });
-  
-//   // Function to render students from Firestore to the table
-//   function renderStudentsTable() {
-//     var table = document.getElementById("result");
-  
-//     // Clear existing table rows
-//     while (table.rows.length > 0) {
-//       table.deleteRow(0);
-//     }
-  
-//     // Get all students from Firestore
-//     db.collection("students")
-//       .get()
-//       .then(function(querySnapshot) {
-//         querySnapshot.forEach(function(doc) {
-//           var row = table.insertRow(-1);
-//           var nameCell = row.insertCell(0);
-//           var classCell = row.insertCell(1);
-//           var idCell = row.insertCell(2);
-//           var actionsCell = row.insertCell(3);
-  
-//           // Populate the table cells with student data
-//           nameCell.textContent = doc.data().name;
-//           classCell.textContent = doc.data().class;
-//           idCell.textContent = doc.data().id;
-  
-//           // Add action buttons (e.g., Edit, Delete) to the actions cell
-//           // Example: Add an Edit button
-//           var editButton = document.createElement("button");
-//           editButton.textContent = "Edit";
-//           actionsCell.appendChild(editButton);
-  
-//           // Example: Add a Delete button
-//           var deleteButton = document.createElement("button");
-//           deleteButton.textContent = "Delete";
-//           actionsCell.appendChild(deleteButton);
-//         });
-//       })
-//       .catch(function(error) {
-//         console.error("Error getting documents: ", error);
-//       });
-//   }
-  
-//   // Call the renderStudentsTable function to populate the initial table
-//   renderStudentsTable();
-  
+// Subscribe to real-time updates
+db.collection("User1").onSnapshot(() => {
+    retrieveDataAndUpdateTable();
+});

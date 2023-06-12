@@ -1,5 +1,127 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Lobster&family=Poppins:wght@400;500&family=Tsukimi+Rounded:wght@400;500&display=swap');
 
+ /* rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // This rule allows anyone with your Firestore database reference to view, edit,
+    // and delete all data in your Firestore database. It is useful for getting
+    // started, but it is configured to expire after 30 days because it
+    // leaves your app open to attackers. At that time, all client
+    // requests to your Firestore database will be denied.
+    //
+    // Make sure to write security rules for your app before that time, or else
+    // all client requests to your Firestore database will be denied until you Update
+    // your rules
+    match /{document=**} {
+      allow read, write: if request.time < timestamp.date(2023, 7, 12);
+    }
+  }
+}  */ 
+  /*   <!-- 
+   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> -->
+<!--    
+   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCKu8oeqHdYVB8GCF-DHRREz0ntiNgH25k",
+      authDomain: "student-managment-webapp1.firebaseapp.com",
+      projectId: "student-managment-webapp1",
+      storageBucket: "student-managment-webapp1.appspot.com",
+      messagingSenderId: "923621203026",
+      appId: "1:923621203026:web:263f8988f92bb823a6d38b"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  
+    // Get a Firestore instance
+    const db = getFirestore(app);
+  
+   // Get add student button element from HTML
+  const addButton = document.getElementById("addstudent");
+
+// Handle button click event
+addButton.addEventListener("click", () => {
+  // Get input field values
+  const nameInput = document.getElementById("name");
+  const classInput = document.getElementById("class");
+  const idInput = document.getElementById("id");
+
+  
+      // Create data object from input values
+      const data = {
+        name: nameInput.value,
+        class: classInput.value,
+        id: idInput.value
+      };
+  
+      // Add data to Firestore collection
+      addDataToFirestore(data);
+    });
+  
+    // Function to add data to Firestore
+    const addDataToFirestore = async (data) => {
+      try {
+        const collectionRef = collection(db, "User1"); // Replace "your-collection-name" with the actual name of your collection
+  
+        const docRef = await addDoc(collectionRef, data);
+        console.log("Document written with ID: ", docRef.id);
+        // Clear input fields after successful submission
+      const nameInput = document.getElementById("name");
+      const classInput = document.getElementById("class");
+      const idInput = document.getElementById("id");
+
+      nameInput.value = "";
+      classInput.value = "";
+      idInput.value = "";
+       // Call the function to retrieve data and update the table
+retrieveDataAndUpdateTable();
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
+    };
+
+// Function to retrieve data from Firestore and update table
+const retrieveDataAndUpdateTable = async () => {
+  const collectionRef = collection(db, "User1"); // Replace "your-collection-name" with the actual name of your collection
+
+  const querySnapshot = await getDocs(collectionRef);
+
+  const nameCell = document.getElementById("name1");
+  const classCell = document.getElementById("class1");
+  const idCell = document.getElementById("id1");
+
+  // Clear previous content
+  nameCell.textContent = "";
+  classCell.textContent = "";
+  idCell.textContent = "";
+
+  querySnapshot.forEach((doc) => {
+    const rowData = doc.data();
+
+    // Update table cells with retrieved data
+    nameCell.textContent = rowData.name;
+    classCell.textContent = rowData.class;
+    idCell.textContent = rowData.id;
+  });
+};
+
+// Call the function to retrieve data and update the table
+retrieveDataAndUpdateTable();
+
+
+  </script> --> */
+  
 
 *{
     margin: 0;
