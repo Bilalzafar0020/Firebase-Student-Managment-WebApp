@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Managment webApp</title>
+
+    <!-- css link  -->
+    <link href="./style.css" rel="stylesheet">
+
+
+<!-- Favicon image (icon for website title) -->
+<link rel="icon"  type="image/x-icon" href="./assets/school-sharp.svg">
+
+
+
+</head>
+<body>
+    
+<main class="main">
+
+<nav>
+   <h2>Students Managment WebApp <img src="./assets/school-outline.svg" width="30px" height="30px"></h2>
+</nav>
+
+
+<div class="inputs">
+
+<form id="form" class="form">
+
+<input type="text" id="name" class="name"   placeholder="Name"  >
+<input type="text" id="class" class="class" placeholder="Class"   >
+<input type="number" id="id" class="id"     placeholder="ID" >
+<button class="add student" id="addstudent">ADD </button>
+
+</form>
+
+
+</div>
+<br/> <br/> <br/>
+
+
+
+<section class="section">
+
+<table class="resultinputs">
+    <th class="name">Name</th>
+    <th class="class">Class</th>
+    <th class="id">ID</th>
+    <th class="Actions"  class="actions">Actions</th>
+</table>
+
+<table class="resultinputs" id="result">
+    <th id="name1" class="name">name</th>
+    <th id="class1" class="class">class</th>
+    <th id="id1" class="id">id</th>
+  
+</table>
+
+
+
+</section>
+
+
+
+
+</main>
+
+
+<!-- 
+ <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+ 
+ <script type="module">
+   // Import the functions you need from the SDKs you need
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+   import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+ 
+   // Your web app's Firebase configuration
+   const firebaseConfig = {
+    apiKey: "AIzaSyCKu8oeqHdYVB8GCF-DHRREz0ntiNgH25k",
+      authDomain: "student-managment-webapp1.firebaseapp.com",
+      projectId: "student-managment-webapp1",
+      storageBucket: "student-managment-webapp1.appspot.com",
+      messagingSenderId: "923621203026",
+      appId: "1:923621203026:web:263f8988f92bb823a6d38b"
+   };
+ 
+   // Initialize Firebase
+   const app = initializeApp(firebaseConfig);
+ 
+   // Get a Firestore instance
+   const db = getFirestore(app);
+ 
+   // Add data to a Firestore collection
+   const addData = async () => {
+     try {
+       const collectionRef = collection(db, "users"); // Replace "your-collection-name" with the actual name of your collection
+ 
+       const data = {
+         name: "John Doe",
+         age: 25,
+         email: "johndoe@example.com"
+       };
+ 
+       const docRef = await addDoc(collectionRef, data);
+       console.log("Document written with ID: ", docRef.id);
+     } catch (error) {
+       console.error("Error adding document: ", error);
+     }
+   };
+ 
+   // Call the function to add data
+   addData();
+ </script>
+  -->
+ 
+   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+   
+   <!-- <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script> -->
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCKu8oeqHdYVB8GCF-DHRREz0ntiNgH25k",
+      authDomain: "student-managment-webapp1.firebaseapp.com",
+      projectId: "student-managment-webapp1",
+      storageBucket: "student-managment-webapp1.appspot.com",
+      messagingSenderId: "923621203026",
+      appId: "1:923621203026:web:263f8988f92bb823a6d38b"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  
+    // Get a Firestore instance
+    const db = getFirestore(app);
+  
+   // Get add student button element from HTML
+  const addButton = document.getElementById("addstudent");
+
+// Handle button click event
+addButton.addEventListener("click", () => {
+  // Get input field values
+  const nameInput = document.getElementById("name");
+  const classInput = document.getElementById("class");
+  const idInput = document.getElementById("id");
+
+  
+      // Create data object from input values
+      const data = {
+        name: nameInput.value,
+        class: classInput.value,
+        id: idInput.value
+      };
+  
+      // Add data to Firestore collection
+      addDataToFirestore(data);
+    });
+  
+    // Function to add data to Firestore
+    const addDataToFirestore = async (data) => {
+      try {
+        const collectionRef = collection(db, "User1"); // Replace "your-collection-name" with the actual name of your collection
+  
+        const docRef = await addDoc(collectionRef, data);
+        console.log("Document written with ID: ", docRef.id);
+        // Clear input fields after successful submission
+      const nameInput = document.getElementById("name");
+      const classInput = document.getElementById("class");
+      const idInput = document.getElementById("id");
+
+      nameInput.value = "";
+      classInput.value = "";
+      idInput.value = "";
+       // Call the function to retrieve data and update the table
+retrieveDataAndUpdateTable();
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
+    };
+
+// Function to retrieve data from Firestore and update table
+const retrieveDataAndUpdateTable = async () => {
+  const collectionRef = collection(db, "User1"); // Replace "your-collection-name" with the actual name of your collection
+
+  const querySnapshot = await getDocs(collectionRef);
+
+  const nameCell = document.getElementById("name1");
+  const classCell = document.getElementById("class1");
+  const idCell = document.getElementById("id1");
+
+  // Clear previous content
+  nameCell.textContent = "";
+  classCell.textContent = "";
+  idCell.textContent = "";
+
+  querySnapshot.forEach((doc) => {
+    const rowData = doc.data();
+
+    // Update table cells with retrieved data
+    nameCell.textContent = rowData.name;
+    classCell.textContent = rowData.class;
+    idCell.textContent = rowData.id;
+  });
+};
+
+// Call the function to retrieve data and update the table
+retrieveDataAndUpdateTable();
+
+
+  </script>
+  
+
+  <!-- // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"; -->
+ <script src="./script.js"></script>   
+</body>
+</html>
