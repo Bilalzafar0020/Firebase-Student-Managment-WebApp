@@ -1,128 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Lobster&family=Poppins:wght@400;500&family=Tsukimi+Rounded:wght@400;500&display=swap');
 
- /* rules_version = '2';
-
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    // This rule allows anyone with your Firestore database reference to view, edit,
-    // and delete all data in your Firestore database. It is useful for getting
-    // started, but it is configured to expire after 30 days because it
-    // leaves your app open to attackers. At that time, all client
-    // requests to your Firestore database will be denied.
-    //
-    // Make sure to write security rules for your app before that time, or else
-    // all client requests to your Firestore database will be denied until you Update
-    // your rules
-    match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2023, 7, 12);
-    }
-  }
-}  */ 
-  /*   <!-- 
-   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> -->
-<!--    
-   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
-
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-  
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyCKu8oeqHdYVB8GCF-DHRREz0ntiNgH25k",
-      authDomain: "student-managment-webapp1.firebaseapp.com",
-      projectId: "student-managment-webapp1",
-      storageBucket: "student-managment-webapp1.appspot.com",
-      messagingSenderId: "923621203026",
-      appId: "1:923621203026:web:263f8988f92bb823a6d38b"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-  
-    // Get a Firestore instance
-    const db = getFirestore(app);
-  
-   // Get add student button element from HTML
-  const addButton = document.getElementById("addstudent");
-
-// Handle button click event
-addButton.addEventListener("click", () => {
-  // Get input field values
-  const nameInput = document.getElementById("name");
-  const classInput = document.getElementById("class");
-  const idInput = document.getElementById("id");
-
-  
-      // Create data object from input values
-      const data = {
-        name: nameInput.value,
-        class: classInput.value,
-        id: idInput.value
-      };
-  
-      // Add data to Firestore collection
-      addDataToFirestore(data);
-    });
-  
-    // Function to add data to Firestore
-    const addDataToFirestore = async (data) => {
-      try {
-        const collectionRef = collection(db, "User1"); // Replace "your-collection-name" with the actual name of your collection
-  
-        const docRef = await addDoc(collectionRef, data);
-        console.log("Document written with ID: ", docRef.id);
-        // Clear input fields after successful submission
-      const nameInput = document.getElementById("name");
-      const classInput = document.getElementById("class");
-      const idInput = document.getElementById("id");
-
-      nameInput.value = "";
-      classInput.value = "";
-      idInput.value = "";
-       // Call the function to retrieve data and update the table
-retrieveDataAndUpdateTable();
-      } catch (error) {
-        console.error("Error adding document: ", error);
-      }
-    };
-
-// Function to retrieve data from Firestore and update table
-const retrieveDataAndUpdateTable = async () => {
-  const collectionRef = collection(db, "User1"); // Replace "your-collection-name" with the actual name of your collection
-
-  const querySnapshot = await getDocs(collectionRef);
-
-  const nameCell = document.getElementById("name1");
-  const classCell = document.getElementById("class1");
-  const idCell = document.getElementById("id1");
-
-  // Clear previous content
-  nameCell.textContent = "";
-  classCell.textContent = "";
-  idCell.textContent = "";
-
-  querySnapshot.forEach((doc) => {
-    const rowData = doc.data();
-
-    // Update table cells with retrieved data
-    nameCell.textContent = rowData.name;
-    classCell.textContent = rowData.class;
-    idCell.textContent = rowData.id;
-  });
-};
-
-// Call the function to retrieve data and update the table
-retrieveDataAndUpdateTable();
-
-
-  </script> --> */
-  
-
 *{
     margin: 0;
     padding: 0;
@@ -133,15 +10,50 @@ font-family: 'Poppins', sans-serif;
 font-family: 'Tsukimi Rounded', sans-serif;
 }
 body{
-    width: 100vw;
+    max-width: 100vw;
     height: 100vh;
+    overflow-y: scroll;  
 }
+
+/*  this is for dynmaicaly add scrollbar using javascript */
+body.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+
+body::-webkit-scrollbar {
+  width: 13px;
+  background: #2c2b2bc7;
+  border-radius: 20px;
+  
+}
+body::-webkit-scrollbar:hover{
+  background: #c5c9d1;
+}
+/* Track */
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+ 
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #c5c9d1;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #222020; 
+}
+body::-webkit-scrollbar-button{
+  background: #2c2b2bc7;
+  height: 9px;
+  border-radius: 2px;
+} 
 
 main.main{
     width: 100%;
-    height: 100vh;
-    overflow-x: auto;
-    overflow-y: auto;
+    height: 100%;
 }
 
 nav{
@@ -149,6 +61,16 @@ nav{
     justify-content: center;
     align-items: center;
     margin-top: 35px;
+}
+@media all and (max-width:430px) and (min-width:320px) {
+  nav h2{
+font-size: 18px;
+  }
+}
+@media all and (max-width:350px) and (min-width:300px) {
+  nav h2{
+font-size: 16.5px;
+  }
 }
 
 div.inputs{
@@ -170,6 +92,12 @@ margin-left: 10rem;
 border-bottom: 2px solid #ccc ;
 
 }
+/* @media all and (max-width:) and (min-width;) {
+  form{
+    margin-left: ;
+  }
+
+} */
 
 input.name,
 input.class,

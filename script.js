@@ -1,6 +1,4 @@
-// script.js
-// Your web app's Firebase configuration
-
+// web app's Firebase configuration  
 const firebaseConfig = {
     apiKey: "AIzaSyCKu8oeqHdYVB8GCF-DHRREz0ntiNgH25k",
     authDomain: "student-managment-webapp1.firebaseapp.com",
@@ -74,7 +72,6 @@ const retrieveDataAndUpdateTable = async () => {
         deleteButton.textContent = "Delete";
         actionsCell.appendChild(editButton);
         actionsCell.appendChild(deleteButton);
-
         // Append cells to row
         row.appendChild(nameCell);
         row.appendChild(classCell);
@@ -93,3 +90,41 @@ retrieveDataAndUpdateTable();
 db.collection("User1").onSnapshot(() => {
     retrieveDataAndUpdateTable();
 });
+
+
+
+
+
+/*   this is for dynmaicaly add scrollbar using javascript 
+Clientwidth here is a DOM elements property which calculate the width of current or present conetnt width
+scrollwidth is also a property which calculate the whole width inculading overflow content
+window is a browser here 
+resize is a event  that trigger when some one resize the browser 
+*/
+
+window.addEventListener('DOMContentLoaded', function() {
+    let body = document.querySelector('body');
+    let mainContent = document.querySelector('main.main');
+    
+  window.addEventListener('resize', checkOverflow());
+   
+    function checkOverflow() {
+      if (mainContent.clientWidth < mainContent.scrollWidth) {
+        body.classList.add('overflow-x-hidden');
+      } else {
+        body.classList.remove('overflow-x-hidden');
+      }
+    }
+  
+    
+  });
+
+/* clientWidth: It represents the inner width of an element, excluding padding but including the vertical scrollbar (if any). In other words, it is the visible width of the element's content area.
+
+scrollWidth: It represents the total width of the element's content, including any content that overflows and is not visible within the element's defined width. It includes the content that requires horizontal scrolling.
+
+*/
+
+/*           Here it end                              */
+
+
