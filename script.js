@@ -44,48 +44,125 @@ addButton.addEventListener("click", async () => {
     }
 });
 
+// // Function to retrieve data from Firestore and update table
+// const retrieveDataAndUpdateTable = async () => {
+//     const querySnapshot = await db.collection("User1").get();
+//     const resultTable = document.getElementById("result");
+
+//     // Clearing previous content
+//     resultTable.innerHTML = "";
+
+//     querySnapshot.forEach((doc) => {
+//         const rowData = doc.data();
+
+//         // Create table row for each document
+//         const row = document.createElement("tr");
+//         // Create table cells
+//         const nameCell = document.createElement("td");
+//         nameCell.textContent = rowData.name;
+//         // nameCell.style.maxWidthwidth = '40px'
+//         const classCell = document.createElement("td");
+//         classCell.textContent = rowData.class;
+//         // classCell.style.maxWidth = '130px'
+//         const idCell = document.createElement("td");
+//         idCell.textContent = rowData.id;
+//         const actionsCell = document.createElement("td");
+//         const editButton = document.createElement("button");
+//         editButton.textContent = "Edit";
+//         const deleteButton = document.createElement("button");
+//         deleteButton.textContent = "Delete";
+//         actionsCell.appendChild(editButton);
+//         actionsCell.appendChild(deleteButton);
+//         // Append cells to row
+//         row.appendChild(nameCell);
+//         row.appendChild(classCell);
+//         row.appendChild(idCell);
+//         row.appendChild(actionsCell);
+
+//         // Append row to table
+//         resultTable.appendChild(row);
+        
+//     });
+// };
+
+// // Call the function to retrieve data and update the table
+// retrieveDataAndUpdateTable();
+
+// // Subscribe to real-time updates
+// db.collection("User1").onSnapshot(() => {
+//     retrieveDataAndUpdateTable();
+// });
+
 // Function to retrieve data from Firestore and update table
 const retrieveDataAndUpdateTable = async () => {
-    const querySnapshot = await db.collection("User1").get();
-    const resultTable = document.getElementById("result");
+  const querySnapshot = await db.collection("User1").get();
+  const resultTable = document.getElementById("result");
 
-    // Clearing previous content
-    resultTable.innerHTML = "";
+  // Clearing previous content
+  resultTable.innerHTML = "";
 
-    querySnapshot.forEach((doc) => {
-        const rowData = doc.data();
+  let maxWidths = {}; // Object to store the maximum widths of each column
 
-        // Create table row for each document
-        const row = document.createElement("tr");
-row.style.width = '100%'
-        // Create table cells
-        const nameCell = document.createElement("td");
-        nameCell.textContent = rowData.name;
-        nameCell.style.paddingLeft = '25px'
-        const classCell = document.createElement("td");
-        classCell.textContent = rowData.class;
-        classCell.style.paddingLeft = '115px';
-        const idCell = document.createElement("td");
-        idCell.textContent = rowData.id;
-        idCell.style.paddingLeft = '90px';
-        const actionsCell = document.createElement("td");
-        const editButton = document.createElement("button");
-        editButton.textContent = "Edit";
-        editButton.style.marginLeft = '55px';
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.style.marginLeft = '05px';
-        actionsCell.appendChild(editButton);
-        actionsCell.appendChild(deleteButton);
-        // Append cells to row
-        row.appendChild(nameCell);
-        row.appendChild(classCell);
-        row.appendChild(idCell);
-        row.appendChild(actionsCell);
+  querySnapshot.forEach((doc) => {
+      const rowData = doc.data();
 
-        // Append row to table
-        resultTable.appendChild(row);
-    });
+      // Create table row for each document
+      const row = document.createElement("tr");
+      // Create table cells
+      const nameCell = document.createElement("td");
+      nameCell.textContent = rowData.name;
+      const classCell = document.createElement("td");
+      classCell.textContent = rowData.class;
+      const idCell = document.createElement("td");
+      idCell.textContent = rowData.id;
+      const actionsCell = document.createElement("td");
+      const editButton = document.createElement("button");
+      editButton.textContent = "Edit";
+      editButton.style.background = '#23aeb7';
+      editButton.style.border = 'none';
+      editButton.style.outline = 'none';
+      editButton.style.borderRadius = '05px';
+      editButton.style.width = '40px';
+      editButton.style.height = '30px';
+      editButton.style.marginLeft = '20px'
+      editButton.style.cursor = 'pointer';
+      editButton.style.color = '#f3f3f3ff';
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.style.background = '#cc2144';
+      deleteButton.style.border = 'none';
+      deleteButton.style.outline = 'none';
+      deleteButton.style.borderRadius = '05px';
+      deleteButton.style.width = '50px';
+      deleteButton.style.height = '30px';
+      deleteButton.style.marginLeft = '15px'
+      deleteButton.style.cursor = 'pointer';
+      deleteButton.style.color = '#f3f3f3ff';
+      actionsCell.appendChild(editButton);
+      actionsCell.appendChild(deleteButton);
+      // Append cells to row
+      row.appendChild(nameCell);
+      row.appendChild(classCell);
+      row.appendChild(idCell);
+      row.appendChild(actionsCell);
+
+      // Append row to table
+      resultTable.appendChild(row);
+
+      // Update the maximum width of each column
+      maxWidths["name"] = Math.max(maxWidths["name"] || 0, nameCell.offsetWidth);
+      maxWidths["class"] = Math.max(maxWidths["class"] || 0, classCell.offsetWidth);
+      maxWidths["id"] = Math.max(maxWidths["id"] || 0, idCell.offsetWidth);
+      maxWidths["actions"] = Math.max(maxWidths["actions"] || 0, actionsCell.offsetWidth);
+  });
+
+  // Set the width of dynamically created td elements
+  const thElements = document.querySelectorAll(".resultinputs th");
+  const tdElements = resultTable.querySelectorAll("td");
+  
+  for (let i = 0; i < tdElements.length; i++) {
+      tdElements[i].style.width = thElements[i].offsetWidth + "px";
+  }
 };
 
 // Call the function to retrieve data and update the table
@@ -93,9 +170,8 @@ retrieveDataAndUpdateTable();
 
 // Subscribe to real-time updates
 db.collection("User1").onSnapshot(() => {
-    retrieveDataAndUpdateTable();
+  retrieveDataAndUpdateTable();
 });
-
 
 
 

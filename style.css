@@ -176,8 +176,20 @@ th.actions{
     border-right: 1px solid #dee2e6;
     font-size:18px;
 }
+/* 
+th.name{
+  width: 9rem !important;
+}
 
-
+th.class{
+  width: 16rem !important;
+}
+th.id{
+  width: 10rem !important;
+}
+th.Actions{
+  width: 10rem !important;
+} */
 /*  new css */
 
 /* Styling for the table */
