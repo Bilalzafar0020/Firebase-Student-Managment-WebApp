@@ -176,20 +176,20 @@ th.actions{
     border-right: 1px solid #dee2e6;
     font-size:18px;
 }
-/* 
+
 th.name{
-  width: 9rem !important;
+  width: 12rem !important;
 }
 
 th.class{
-  width: 16rem !important;
+  width: 24.5rem !important;
 }
 th.id{
-  width: 10rem !important;
+  width: 13rem !important;
 }
 th.Actions{
-  width: 10rem !important;
-} */
+  width: 16.5rem !important;
+}
 /*  new css */
 
 /* Styling for the table */
@@ -204,6 +204,7 @@ th.Actions{
   border-bottom: 2px solid #dee2e6;
   border-left: 1px solid #dee2e6;
   border-right: 1px solid #dee2e6;
+  word-break: break-all;  /* most powerful */ 
 }
 
 /* Styling for the table heading */
@@ -212,13 +213,13 @@ th.Actions{
 }
 
 /* Styling for the action buttons */
-#result button {
+/* #result button {
   margin-right: 4px;
-}
+} */
 
 /* Hide horizontal overflow */
-.overflow-x-hidden {
-  overflow-x: hidden;
+#result {
+  overflow-y:auto ;
 }
 
 

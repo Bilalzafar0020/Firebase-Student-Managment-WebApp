@@ -149,6 +149,12 @@ const retrieveDataAndUpdateTable = async () => {
       // Append row to table
       resultTable.appendChild(row);
 
+
+
+
+/*   Chat Gpt solution below this keep the dynamicclay creating th,td width equal to heading */
+
+
       // Update the maximum width of each column
       maxWidths["name"] = Math.max(maxWidths["name"] || 0, nameCell.offsetWidth);
       maxWidths["class"] = Math.max(maxWidths["class"] || 0, classCell.offsetWidth);
@@ -165,6 +171,11 @@ const retrieveDataAndUpdateTable = async () => {
   }
 };
 
+  /*   chatGpt code ended */
+
+
+
+  
 // Call the function to retrieve data and update the table
 retrieveDataAndUpdateTable();
 
