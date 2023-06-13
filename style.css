@@ -158,13 +158,14 @@ button#addstudent:hover{
 
 section.section{
     margin-left: 25%;
-    border: 1px solid #dee2e6;
+    /* border: 1px solid #dee2e6; */
     width: 38rem;
     height: 20%;
 }
 
 table.resultinputs{
     width: 100%;
+    border:  1px solid #dee2e6; ;
     border-bottom: 4px solid #dee2e6;
     height: 50px;
 }
@@ -190,6 +191,7 @@ th.actions{
   padding: 8px;
   border-bottom: 2px solid #dee2e6;
   border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
 }
 
 /* Styling for the table heading */
