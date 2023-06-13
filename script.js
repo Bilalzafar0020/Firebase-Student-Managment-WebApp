@@ -57,19 +57,24 @@ const retrieveDataAndUpdateTable = async () => {
 
         // Create table row for each document
         const row = document.createElement("tr");
-
+row.style.width = '100%'
         // Create table cells
         const nameCell = document.createElement("td");
         nameCell.textContent = rowData.name;
+        nameCell.style.paddingLeft = '25px'
         const classCell = document.createElement("td");
         classCell.textContent = rowData.class;
+        classCell.style.paddingLeft = '115px';
         const idCell = document.createElement("td");
         idCell.textContent = rowData.id;
+        idCell.style.paddingLeft = '90px';
         const actionsCell = document.createElement("td");
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
+        editButton.style.marginLeft = '55px';
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
+        deleteButton.style.marginLeft = '05px';
         actionsCell.appendChild(editButton);
         actionsCell.appendChild(deleteButton);
         // Append cells to row
