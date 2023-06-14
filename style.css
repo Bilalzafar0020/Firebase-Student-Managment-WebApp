@@ -22,6 +22,14 @@ body{
     background-attachment: fixed; */
 }
 
+/* @media all and (max-width:) and (min-width:) {
+  
+}
+ */
+
+
+
+
 /*  this is for dynmaicaly add scrollbar using javascript */
 body.overflow-x-hidden {
   overflow-x: hidden;

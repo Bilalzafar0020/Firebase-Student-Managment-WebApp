@@ -132,7 +132,21 @@ deleteButton.addEventListener('click',function(){
     showLoaderOnConfirm: true, 
     preConfirm: (password) => {
       if (password === 'bilalP') {
-      } else {
+
+/*------------------------------------ Delete functunality       ----------------------------------------------*/
+
+let docId = doc.id; // document id which we have to delete (document of firebase )
+
+        db.collection("User1").doc(docId).delete().then(() => {
+
+          let wholeRow = deleteButton.parentNode.parentNode; // deletebutton parent and it's parent
+          wholeRow.remove(); 
+      }).catch((error) => {
+         alert('Some think went wrong  Retry!')
+      });
+
+      } 
+  else {
         Swal.showValidationMessage('Invalid password');
       }
     }
