@@ -44,54 +44,6 @@ addButton.addEventListener("click", async () => {
     }
 });
 
-// // Function to retrieve data from Firestore and update table
-// const retrieveDataAndUpdateTable = async () => {
-//     const querySnapshot = await db.collection("User1").get();
-//     const resultTable = document.getElementById("result");
-
-//     // Clearing previous content
-//     resultTable.innerHTML = "";
-
-//     querySnapshot.forEach((doc) => {
-//         const rowData = doc.data();
-
-//         // Create table row for each document
-//         const row = document.createElement("tr");
-//         // Create table cells
-//         const nameCell = document.createElement("td");
-//         nameCell.textContent = rowData.name;
-//         // nameCell.style.maxWidthwidth = '40px'
-//         const classCell = document.createElement("td");
-//         classCell.textContent = rowData.class;
-//         // classCell.style.maxWidth = '130px'
-//         const idCell = document.createElement("td");
-//         idCell.textContent = rowData.id;
-//         const actionsCell = document.createElement("td");
-//         const editButton = document.createElement("button");
-//         editButton.textContent = "Edit";
-//         const deleteButton = document.createElement("button");
-//         deleteButton.textContent = "Delete";
-//         actionsCell.appendChild(editButton);
-//         actionsCell.appendChild(deleteButton);
-//         // Append cells to row
-//         row.appendChild(nameCell);
-//         row.appendChild(classCell);
-//         row.appendChild(idCell);
-//         row.appendChild(actionsCell);
-
-//         // Append row to table
-//         resultTable.appendChild(row);
-        
-//     });
-// };
-
-// // Call the function to retrieve data and update the table
-// retrieveDataAndUpdateTable();
-
-// // Subscribe to real-time updates
-// db.collection("User1").onSnapshot(() => {
-//     retrieveDataAndUpdateTable();
-// });
 
 // Function to retrieve data from Firestore and update table
 const retrieveDataAndUpdateTable = async () => {
@@ -118,9 +70,6 @@ const retrieveDataAndUpdateTable = async () => {
       const actionsCell = document.createElement("td");
       const editButton = document.createElement("button");
       editButton.textContent = "Edit";
-      // editButton.addEventListener('click', function Edit(){
-     
-      // })
       editButton.style.background = '#23aeb7';
       editButton.style.border = 'none';
       editButton.style.outline = 'none';
@@ -131,6 +80,28 @@ const retrieveDataAndUpdateTable = async () => {
       editButton.style.cursor = 'pointer';
       editButton.style.color = '#f3f3f3ff';
       editButton.classList.add('editable_transform')
+
+editButton.addEventListener('click',function(){
+  Swal.fire({
+    title: 'Fill inputs to Edit Student',
+  html:
+    '<input id="swal-input1" class="swal2-input" placeholder=" Enter Name " >' +
+    '<input id="swal-input2" class="swal2-input" placeholder=" Enter Class ">'+
+    '<input id="swal-input2" class="swal2-input" placeholder=" Enter Roll No " type="Number" >',
+  focusConfirm: false,
+  preConfirm: () => {
+    return [
+      document.getElementById('swal-input1').value,
+      document.getElementById('swal-input2').value
+    ]
+  }
+
+// if (formValues) {
+//   Swal.fire(JSON.stringify(formValues))
+// }
+  });
+});
+
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.style.background = '#cc2144';
@@ -143,15 +114,39 @@ const retrieveDataAndUpdateTable = async () => {
       deleteButton.style.cursor = 'pointer';
       deleteButton.style.color = '#f3f3f3ff';
       deleteButton.classList.add('delete_transform');
+
+deleteButton.addEventListener('click',function(){
+  Swal.fire({
+    title: 'Enter password',
+    input: 'password',
+    inputLabel: 'Password',
+    inputPlaceholder: 'Enter Password to delete',
+    inputAttributes: {
+      maxlength: 15,
+      autocapitalize: 'off',
+      autocorrect: 'off'
+    },
+    showCancelButton: true, 
+    cancelButtonText: 'Cancel', 
+        confirmButtonText: 'Confirm', 
+    showLoaderOnConfirm: true, 
+    preConfirm: (password) => {
+      if (password === 'bilalP') {
+      } else {
+        Swal.showValidationMessage('Invalid password');
+      }
+    }
+  });
+})
+
       actionsCell.appendChild(editButton);
       actionsCell.appendChild(deleteButton);
-      // Append cells to row
+
       row.appendChild(nameCell);
       row.appendChild(classCell);
       row.appendChild(idCell);
       row.appendChild(actionsCell);
 
-      // Append row to table
       resultTable.appendChild(row);
 
 
@@ -181,7 +176,7 @@ const retrieveDataAndUpdateTable = async () => {
 
 
   
-// Call the function to retrieve data and update the table
+// Calling the function to retrieve data and update the table
 retrieveDataAndUpdateTable();
 
 // Subscribe to real-time updates
