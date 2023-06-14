@@ -89,12 +89,16 @@ const retrieveDataAndUpdateTable = async () => {
 
 editButton.addEventListener('click',function(){
   Swal.fire({
-    title: 'Fill inputs to Edit Student',
+    title: 'Fill inputs to Edit this Student data',
   html:
     '<input id="swal-input1" class="swal2-input" placeholder=" Enter Name " >' +
     '<input id="swal-input2" class="swal2-input" placeholder=" Enter Class ">'+
     '<input id="swal-input3" class="swal2-input" placeholder=" Enter Roll No " type="Number" >',
   focusConfirm: false,
+  showCancelButton: true,
+  confirmButtonColor: "#2ded27",
+  confirmButtonText: "Yes, Edit",
+  cancelButtonText: "No, cancel",
   preConfirm: () => {
     return [
       document.getElementById('swal-input1').value,
@@ -103,9 +107,6 @@ editButton.addEventListener('click',function(){
     ]
   }
 
-// if (formValues) {
-//   Swal.fire(JSON.stringify(formValues))
-// }
   }).then(( result) =>{
 
     if(result.isConfirmed){
@@ -159,6 +160,7 @@ editButton.addEventListener('click',function(){
 
 });
 
+
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.style.background = '#cc2144';
@@ -173,23 +175,20 @@ editButton.addEventListener('click',function(){
       deleteButton.classList.add('delete_transform');
 
 deleteButton.addEventListener('click',function(){
-  Swal.fire({
-    title: 'Enter password',
-    input: 'password',
-    inputLabel: 'Password',
-    inputPlaceholder: 'Enter Password to delete',
-    inputAttributes: {
-      maxlength: 15,
-      autocapitalize: 'off',
-      autocorrect: 'off'
-    },
-    showCancelButton: true, 
-    cancelButtonText: 'Cancel', 
-        confirmButtonText: 'Confirm', 
-    showLoaderOnConfirm: true, 
-    preConfirm: (password) => {
-      if (password === 'bilalP') {
+  
+    swal.fire({
+      title: "Are you sure?",
+      text: ("This Student Data will be removed"),
+      showCancelButton: true,
+      confirmButtonColor: "#e82235",
+      confirmButtonText: "Yes, delete",
+      cancelButtonText: "No, cancel",
+      icon: "warning",
+      dangerMode: true,
+  })
+  .then( (result) =>  {
 
+if(result.isConfirmed){
 /*------------------------------------ Delete functunality       ----------------------------------------------*/
 
 let docId = doc.id; // document id which we have to delete (document of firebase )
@@ -210,6 +209,7 @@ let docId = doc.id; // document id which we have to delete (document of firebase
 });
 
 })
+
    .catch((error) => {
     Swal.fire({
       icon: "error",
@@ -222,14 +222,12 @@ let docId = doc.id; // document id which we have to delete (document of firebase
 
       });
 
-      } 
-      
-  else {
-        Swal.showValidationMessage('Invalid password');
-      }
-    }
-  });
-})
+}
+
+  })
+
+  
+ })
 
       actionsCell.appendChild(editButton);
       actionsCell.appendChild(deleteButton);
@@ -242,7 +240,7 @@ let docId = doc.id; // document id which we have to delete (document of firebase
       resultTable.appendChild(row);
 
 
-
+   
 
 /*   Chat Gpt solution below this keep the dynamicclay creating th,td width equal to heading */
 
