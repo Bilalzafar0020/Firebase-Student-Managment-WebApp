@@ -118,18 +118,19 @@ const retrieveDataAndUpdateTable = async () => {
       const actionsCell = document.createElement("td");
       const editButton = document.createElement("button");
       editButton.textContent = "Edit";
-      editButton.addEventListener('click', function Edit(){
+      // editButton.addEventListener('click', function Edit(){
      
-      })
+      // })
       editButton.style.background = '#23aeb7';
       editButton.style.border = 'none';
       editButton.style.outline = 'none';
-      editButton.style.borderRadius = '05px';
+      editButton.style.borderRadius = '5px';
       editButton.style.width = '40px';
       editButton.style.height = '30px';
       editButton.style.marginLeft = '20px'
       editButton.style.cursor = 'pointer';
       editButton.style.color = '#f3f3f3ff';
+      editButton.classList.add('editable_transform')
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.style.background = '#cc2144';
@@ -141,6 +142,7 @@ const retrieveDataAndUpdateTable = async () => {
       deleteButton.style.marginLeft = '15px'
       deleteButton.style.cursor = 'pointer';
       deleteButton.style.color = '#f3f3f3ff';
+      deleteButton.classList.add('delete_transform');
       actionsCell.appendChild(editButton);
       actionsCell.appendChild(deleteButton);
       // Append cells to row

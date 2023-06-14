@@ -92,13 +92,18 @@ margin-left: 10rem;
 border-bottom: 2px solid #ccc ;
 
 }
-/* @media all and (max-width:) and (min-width;) {
+@media all and (max-width:500px) and (min-width:380px) {
   form{
-    margin-left: ;
+    margin-left: 5rem;
   }
 
-} */
+}
+@media all and (max-width:380px) and (min-width:300px) {
+  form{
+    margin-left: 2rem;
+  }
 
+}
 input.name,
 input.class,
 input.id{
@@ -154,8 +159,13 @@ input.id:hover {     /*  so that when user focus it the bordere should display *
 button#addstudent:hover{
     transform: scale(1.1);
 }
-
-
+.editable_transform:hover{
+transform: scale(1.2);
+}
+.delete_transform:hover{
+  transform: scale(1.2);
+  }
+  
 section.section{
     margin-left: 25%;
     /* border: 1px solid #dee2e6; */
