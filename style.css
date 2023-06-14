@@ -229,11 +229,6 @@ th.Actions{
   font-weight: bold;
 }
 
-/* Styling for the action buttons */
-/* #result button {
-  margin-right: 4px;
-} */
-
 /* Hide horizontal overflow */
 #result {
   overflow-y:auto ;
