@@ -9,11 +9,11 @@ const firebaseConfig = {
   };
 
 
-// Initialize Firebase
+// Initializing Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Geting add student button element from HTML
+
 const addButton = document.getElementById("addstudent");
 
 // Handling button click event
@@ -106,9 +106,9 @@ const retrieveDataAndUpdateTable = async () => {
   querySnapshot.forEach((doc) => {
       const rowData = doc.data();
 
-      // Create table row for each document
+      // Creating table row for each document
       const row = document.createElement("tr");
-      // Create table cells
+      // Creating table cells
       const nameCell = document.createElement("td");
       nameCell.textContent = rowData.name;
       const classCell = document.createElement("td");
@@ -118,6 +118,9 @@ const retrieveDataAndUpdateTable = async () => {
       const actionsCell = document.createElement("td");
       const editButton = document.createElement("button");
       editButton.textContent = "Edit";
+      editButton.addEventListener('click', function Edit(){
+     
+      })
       editButton.style.background = '#23aeb7';
       editButton.style.border = 'none';
       editButton.style.outline = 'none';
