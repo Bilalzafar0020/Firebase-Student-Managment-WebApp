@@ -30,6 +30,8 @@ addButton.addEventListener("click", async () => {
         id: idInput.value
     };
 
+    /*------------------------------------ Adding to database functunality       ----------------------------------------------*/
+
     try {
         // Adding data to Firestore collection
         await db.collection("User1").add(data);
@@ -43,6 +45,10 @@ addButton.addEventListener("click", async () => {
         console.error("Error adding document: ", error);
     }
 });
+
+
+
+/*------------------------------------ geting back data from database functunality       ----------------------------------------------*/
 
 
 // Function to retrieve data from Firestore and update table
@@ -87,19 +93,70 @@ editButton.addEventListener('click',function(){
   html:
     '<input id="swal-input1" class="swal2-input" placeholder=" Enter Name " >' +
     '<input id="swal-input2" class="swal2-input" placeholder=" Enter Class ">'+
-    '<input id="swal-input2" class="swal2-input" placeholder=" Enter Roll No " type="Number" >',
+    '<input id="swal-input3" class="swal2-input" placeholder=" Enter Roll No " type="Number" >',
   focusConfirm: false,
   preConfirm: () => {
     return [
       document.getElementById('swal-input1').value,
-      document.getElementById('swal-input2').value
+      document.getElementById('swal-input2').value,
+      document.getElementById('swal-input3').value
     ]
   }
 
 // if (formValues) {
 //   Swal.fire(JSON.stringify(formValues))
 // }
-  });
+  }).then(( result) =>{
+
+    if(result.isConfirmed){
+     
+      // updating the table td's values according to user input // 
+
+      nameCell.textContent = result.value[0];
+      classCell.textContent = result.value[1];
+      idCell.textContent = result.value[2];
+
+
+/*--------------------------- edit user again input in database functionality               ------------------------------------------------*/ 
+
+  let documentId = doc.id; 
+  
+  db.collection("User1").doc(documentId).update({
+
+    name: result.value[0],
+    class: result.value[1],
+    id: result.value[2]
+
+})
+.then(() => {
+   // edit successful popup
+   Swal.fire({
+    icon: "success",
+    title: "Edited",
+    confirmButtonText: "OK",
+    confirmButtonColor: "#0d86ff",
+});
+})
+
+.catch(() => {
+
+  // alert('database updating problem' , error)
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "database updating problem",
+    footer: "Please Retry !",
+    confirmButtonColor: "#0d86ff",
+    confirmButtonText: "OK",
+});
+})
+
+
+    }   
+
+  })
+
+
 });
 
       const deleteButton = document.createElement("button");
@@ -140,12 +197,33 @@ let docId = doc.id; // document id which we have to delete (document of firebase
         db.collection("User1").doc(docId).delete().then(() => {
 
           let wholeRow = deleteButton.parentNode.parentNode; // deletebutton parent and it's parent
-          wholeRow.remove(); 
-      }).catch((error) => {
-         alert('Some think went wrong  Retry!')
+          wholeRow.remove() 
+        })
+
+.then( () =>{
+
+  Swal.fire({
+    icon: "success",
+    title: "Deleted",
+    confirmButtonText: "OK",
+    confirmButtonColor: "#0d86ff",
+});
+
+})
+   .catch((error) => {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: " Does not delete",
+      footer: "Please Retry !",
+      confirmButtonColor: "#0d86ff",
+      confirmButtonText: "OK",
+  });
+
       });
 
       } 
+      
   else {
         Swal.showValidationMessage('Invalid password');
       }
