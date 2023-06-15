@@ -89,7 +89,7 @@ const retrieveDataAndUpdateTable = async () => {
 
 editButton.addEventListener('click',function(){
   Swal.fire({
-    title: 'Fill inputs to Edit this Student data',
+    title: 'Fill inputs to Update Student Record',
   html:
     '<input id="swal-input1" class="swal2-input" placeholder=" Enter Name " >' +
     '<input id="swal-input2" class="swal2-input" placeholder=" Enter Class ">'+
@@ -97,8 +97,8 @@ editButton.addEventListener('click',function(){
   focusConfirm: false,
   showCancelButton: true,
   confirmButtonColor: "#2ded27",
-  confirmButtonText: "Yes, Edit",
-  cancelButtonText: "No, cancel",
+  confirmButtonText: "Edit",
+  cancelButtonText: "Cancel",
   preConfirm: () => {
     return [
       document.getElementById('swal-input1').value,
