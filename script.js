@@ -133,7 +133,7 @@ editButton.addEventListener('click',function(){
    // edit successful popup
    Swal.fire({
     icon: "success",
-    title: "Edited",
+    title: " Successfully Edited",
     confirmButtonText: "OK",
     confirmButtonColor: "#0d86ff",
 });
@@ -203,7 +203,7 @@ let docId = doc.id; // document id which we have to delete (document of firebase
 
   Swal.fire({
     icon: "success",
-    title: "Deleted",
+    title: "Successfully Deleted",
     confirmButtonText: "OK",
     confirmButtonColor: "#0d86ff",
 });
